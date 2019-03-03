@@ -1,10 +1,12 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:redux_dev_tools/redux_dev_tools.dart';
 import 'package:redux/redux.dart';
+import 'package:redux_dev_tools/redux_dev_tools.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux_architecture_skeleton/redux/app_state.dart';
 import 'package:redux_architecture_skeleton/redux/reducers.dart';
 import 'package:redux_architecture_skeleton/redux/middleware.dart';
+import 'package:redux_architecture_skeleton/redux/actions/example_actions.dart';
 
 void main() => runApp(MyApp());
 
@@ -23,7 +25,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
         ),
         home: StoreBuilder<AppState>(
-            builder: (BuildContext context, Store<AppState> store) => Column()),
+            builder: (BuildContext context, Store<AppState> store) => ExampleView()),
       ),
     );
   }
@@ -36,19 +38,37 @@ class _ExampleViewModel {
 
   final bool hasAccount;
 
-  _ExampleViewModel(
-      {@required this.name, @required this.surname, @required this.hasAccount});
+  final Function(String, String, bool) setExampleData;
+
+  _ExampleViewModel({
+    @required this.name, 
+    @required this.surname, 
+    @required this.hasAccount,
+    @required this.setExampleData});
 
   factory _ExampleViewModel.create(Store<AppState> store) {
+
+    void _setExampleData(String name, String surnmae, bool hasAccount) {
+      store.dispatch(SetExampleDataAction(name: name, surname: surnmae, hasAccount: hasAccount));
+    }
+
     return _ExampleViewModel(
         name: store.state.example.name,
         surname: store.state.example.surname,
-        hasAccount: store.state.example.hasAccount);
+        hasAccount: store.state.example.hasAccount,
+        setExampleData: _setExampleData);
   }
 }
 
-class ExampleView extends StatelessWidget {
-  ExampleView();
+class ExampleView extends StatefulWidget {
+  @override
+  _ExampleViewState createState() => _ExampleViewState();
+}
+
+class _ExampleViewState extends State<ExampleView> {
+
+  TextEditingController name = TextEditingController();
+  TextEditingController surname =TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +79,17 @@ class ExampleView extends StatelessWidget {
         converter: (Store<AppState> store) => _ExampleViewModel.create(store),
         builder: (BuildContext context, _ExampleViewModel viewModel) =>
             Scaffold(
+              floatingActionButton: FloatingActionButton(
+                onPressed: (){
+                  viewModel.setExampleData(
+                    '${viewModel.name} - ${Random().nextInt(100)}',
+                    '${viewModel.surname} - ${Random().nextInt(100)}',
+                    Random().nextBool()
+                  );
+                },
+              ),
                 body: Column(children: <Widget>[
+                  Container(height: 55.0),
                   Row(children: [Text('Name:'), Text(viewModel.name)]),
                   Row(children: [Text('Surname:'), Text(viewModel.surname)]),
                   Row(children: [
