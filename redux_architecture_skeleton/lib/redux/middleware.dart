@@ -24,10 +24,10 @@ Middleware<AppState> _exampleMiddleAction() {
     // Pass action on to the application to update the state
     next(action);
 
-    // To something here with the sate. Save it to disk
+    // Do something here with the sate. Maybe Save it to disk
     await Future.delayed(Duration(seconds: 1));
 
-    // Then dispatch and action if you want or do nothing
+    // Then dispatch an action if you want or do nothing
     next(MiddlewareExampleCompleteAction());
   };
 }
