@@ -4,8 +4,6 @@ A collection of popular architectures used when developing Flutter applications.
 
 In this repo you can find skeletons for the following architectures.
 
-- Redux
+- [Redux](https://github.com/FilledStacks/flutter-architecture-skeletons/tree/master/redux_arch)
 
-- ScopedModel
-
-
+Follow or star this repo to receive updates of when I add new skeletons.
