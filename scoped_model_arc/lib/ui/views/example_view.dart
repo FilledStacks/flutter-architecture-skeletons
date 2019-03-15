@@ -4,14 +4,14 @@ import 'package:scoped_model/scoped_model.dart';
 
 import 'package:scoped_model_arc/scoped_models/app_model.dart';
 
-class ExamplePage extends StatefulWidget {
-  ExamplePage({Key key}) : super(key: key);
+class ExampleView extends StatefulWidget {
+  ExampleView({Key key}) : super(key: key);
 
   @override
-  _ExamplePageState createState() => _ExamplePageState();
+  _ExampleViewState createState() => _ExampleViewState();
 }
 
-class _ExamplePageState extends State<ExamplePage> {
+class _ExampleViewState extends State<ExampleView> {
   static const TextStyle titleStyle =
       TextStyle(fontSize: 25.0, fontWeight: FontWeight.w700);
 

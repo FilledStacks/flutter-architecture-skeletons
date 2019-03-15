@@ -36,11 +36,13 @@ This will contain separate services / components or whatever you call it that pe
 
 ### UI
 
-Contains all the code relating to the user interface. Flutter is a code first approach to building UI (which is great) so all the code files can live together in harmony without having to fuss about if it's an asset or a code file like in native programming. We only have one folder (as a start) and with more code I usually introduce a components folder as well as a util folder for shared UI helper functions. The structure is as follows.
+Contains all the code relating to the user interface. Flutter is a code first approach to building UI (which is great) so all the code files can live together in harmony without having to fuss about if it's an asset or a code, unlike with native programming. 
 
-**pages/**: Contains the files for each of the pages in your applications.
+We only have one folder (as a start) and with more code I usually introduce a components folder as well as a util folder for shared UI helper functions. The structure is as follows.
 
-Naming convention: [viewname]_page.dart
+**views/**: Contains the files for each of the views in your application.
+
+Naming convention: [viewname]_view_.dart
 
 ## Feedback and contemplation
 
